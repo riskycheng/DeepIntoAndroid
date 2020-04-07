@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DeepIntoAndroid</string>
+
+    <string name="startThread">StartThread</string>
+
+    <string name="request_cameraPermission">Request Camera Permission</string>
 </resources>
