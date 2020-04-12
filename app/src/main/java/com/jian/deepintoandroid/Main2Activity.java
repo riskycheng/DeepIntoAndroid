@@ -94,6 +94,34 @@ public class Main2Activity extends AppCompatActivity {
         MyFutureTask myFutureTask = new MyFutureTask(mCallable);
         ExecutorService executorService4 = Executors.newSingleThreadExecutor();
         executorService4.submit(myFutureTask);
+
+        //5. 通过FutureTask<Runnable, V> 构造
+        int result = 0;
+        FutureTask futureTaskRunnableV = new FutureTask<Integer>(runnable, result);
+        ExecutorService executorService5 = Executors.newSingleThreadExecutor();
+        executorService5.submit(futureTaskRunnableV);
+        try {
+            int result2 = futureTask.get();
+            Log.e(TAG, "result from executorService5 @ myFutureTask is >>> " + result2);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // 6. 通过FutureTask自己的Run函数
+        MyFutureTask myFutureTaskOwnRun = new MyFutureTask(mCallable);
+        myFutureTaskOwnRun.run();
+        try {
+            int result6 = myFutureTaskOwnRun.get();
+            Log.e(TAG, "result from myFutureTaskOwnRun is >>> " + result6);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     private class MyFutureTask extends FutureTask<Integer> {
